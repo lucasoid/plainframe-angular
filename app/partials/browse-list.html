@@ -1,0 +1,37 @@
+<div class="list-wrap">
+	<h1 class="centered">{{ title }}</h1>
+	
+	<div ng-cloak ng-show="items.length || total">
+	<div browse-controls></div>
+	<div ng-show="loading == false && items.length == 0" class="browse-empty"><span>No records to display.</span></div>
+	<popup-form ng-repeat="template in formTemplates" obj="{}" template="{{ template }}" helpers="{new:true}" after-submit="refresh()"></popup-form>
+	<export-results collection="items"></export-results>
+	<div ng-if="items.length && hasCheckboxes" class="inline">
+	<popup-form obj="items" template="add-to-list" helpers="{}" after-submit=""></popup-form>
+	</div> 
+	<table class="table browse" ng-show="total.count > 0">
+		<thead>
+			<tr>
+				<th ng-if="hasCheckboxes"><span ng-click="checkAll()" class="clickable">All</span></th>
+				<th ng-repeat="column in columns" ng-class="column.type == 'number' || column.type == 'agg' ? 'align-right' : 'align-left'" ng-hide="column.hidden">
+					<span>{{ column.label}}</span>
+				</th>
+				<th ng-if="actionTemplates.length">
+					<span>Actions</span>
+				</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="item in items track by item.id ">
+			<td ng-if="hasCheckboxes"><input type="checkbox" ng-model="item.checked" ng-change="updateChecked()"/></td>
+			<td ng-repeat="column in columns" ng-class="column.type == 'number' || column.type == 'agg' ? 'align-right' : 'align-left'" ng-hide="column.hidden" ng-bind-html="getColumnData(item, column)"></td>
+			<td ng-if="actionTemplates.length">
+				<popup-form ng-repeat="template in actionTemplates" obj="item" template="{{ template }}" helpers="{new:false, resource:model}" after-submit="refresh()"></popup-form>
+			</td>
+		</tr>
+	</table>
+	
+	</div>
+	<div ng-show="loading" class="loading">
+		<i class="loading-icon fa fa-spinner fa-spin"></i>
+	</div>
+</div>

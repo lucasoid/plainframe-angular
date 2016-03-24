@@ -1,0 +1,78 @@
+<div class="pagination-container row">
+	<div class="col-md-6 col-xs-12">
+		{{ total.count }} records
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<span class="float-right"><button class="browse-controls" ng-model="page" ng-click="page = page > 1 ? page - 1 : page; refresh()"><i class="fa fa-angle-double-left"></i></button>
+		Page
+		<input class="page" size="2" type="text" class="browse-controls" ng-model="page" ng-change="refresh()" ></input>
+		of {{ numPages }}
+		<button  class="browse-controls" ng-model="page" ng-click="page = page < numPages ? page + 1 : page; refresh()"><i class="fa fa-angle-double-right"></i></button>
+		Records/page: <input class="rpp" size="4" type="text" class="browse-controls" ng-model="rpp"></input><button class="browse-controls" ng-click="refresh()"><i class="fa fa-refresh" ></i></button>
+		</span>
+	</div>
+</div>
+<div class="browse-controls-container" ng-init="showBrowseControls = false">
+	<div class="browse-controls-box" ng-show="showBrowseControls">
+	<div class="row">
+		<div class="col-md-6 col-xs-12">
+			<span class="browse-controls-header">Sort:</span>
+			<div class="browse-controls-wrapper" ng-repeat="sortlevel in sortlevels">
+				<select  class="browse-controls" ng-model="sortlevel.orderby" ng-change="refresh()">
+					<option ng-repeat="column in columns" ng-if="column.canSort" value="{{ column.sortOn == undefined ? column.key : column.sortOn }}">{{ column.label }}</option>
+				</select>
+				<button class="browse-controls" ng-model="sortlevel.sort" ng-click="toggleSort(sortlevel); refresh()">{{ sortlevel.sort | uppercase }}</button>
+				<button class="browse-controls remove float-right" ng-model="sortlevel" ng-click="sortlevels.splice($index, 1); refresh();"><i class="fa fa-times"></i></button>
+			</div>
+			<button ng-click="sortlevels.push({orderby:'', sort:'asc'})">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+		<div class="col-md-6 col-xs-12">
+			<span class="browse-controls-header">Filter:</span>
+			<div class="browse-controls-wrapper" ng-repeat="filter in filters">
+				<select class="browse-controls" ng-model="filter.field" ng-options="column.key as column.label for column in columns" ng-change="setColumnType(filter)"></select>
+				<select ng-model="filter.operator" ng-options="op.key as op.label for op in filterOperators[filter.columnType]" ng-change="initVal(filter)"></select>
+				<input ng-show="filter.columnType != 'date'" class="browse-controls" ng-model="filter.value" type="{{ filterInputs[filter.columnType].inputType }}" />
+				<input ng-show="filter.columnType == 'date'" datepicker class="browse-controls" ng-model="filter.value" type="{{ filterInputs[filter.columnType].inputType }}" />
+				<button class="browse-controls" ng-click="refresh()"><i class="fa fa-refresh"></i></button>
+				<button class="browse-controls remove float-right" ng-model="filter" ng-click="filters.splice($index, 1); refresh();"><i class="fa fa-times"></i></button>
+			</div>
+			<button ng-click="filters.push({field:'', operator:'', value:''})"><i class="fa fa-plus"></i></button>
+		</div>
+	</div>
+	<div class="row">
+	    <div class="col-md-6 col-xs-12">
+	      <span class="browse-controls-header">Columns:</span>
+	      <span class="clickable browse-controls-wrapper" ng-repeat="column in columns" ng-click="column.hidden = column.hidden ? false : true" ng-class="column.hidden ? 'inactive' : 'active'" >
+	      	<i class="fa" ng-class="column.hidden ? 'fa-toggle-off' : 'fa-toggle-on' "></i>
+	      	<span>{{ column.label }}</span>
+	      </span>
+	      
+	    </div>
+	      
+		<div class="col-md-6 col-xs-12">
+		  
+		  <span class="browse-controls-header">Saved views:</span>
+		  <form>
+		  <span ng-repeat="preset in presets" class="browse-controls-wrapper" ng-class="preset.primeflag ==1 ? 'default' : ''">
+			<button class="browse-controls" ng-click="setDefaultPreset($index)">Default? <i class="fa" ng-class="preset.primeflag == 1 ? 'fa-toggle-on' : 'fa-toggle-off'"></i></button>		  
+		  	<button class="browse-controls" ng-click="applyPreset(preset); refresh()">{{ preset.name }}</button>
+		  	<button class="browse-controls float-right" ng-click="deletePreset(preset, $index)" nsc-confirm-click="You mean it?"><i class="fa fa-trash"></i></button>
+		  </span>
+		  </form>
+		  <span class="browse-controls-wrapper" ng-show="showSavePreset">
+		  	Save this view: <input class="browse-controls" size="12" type="text" ng-model="newPresetName" name="preset_name" value="" placeholder="name"/>
+		  	<button class="browse-controls" ng-click="savePreset(newPresetName)"><i class="fa fa-save"></i></button>
+		  	<button class="browse-controls remove float-right" ng-click="showSavePreset = false"><i class="fa fa-times"></i></button>
+		  </span>
+		  <button ng-click="showSavePreset = true"><i class="fa fa-plus"></i></button>
+		</div>
+	</div>
+	<div class="browse-controls-message"><span ng-repeat="message in browseControlsMessage.slice().reverse() track by $index">{{ message }}</span></div>
+	</div>
+	<div class="expand clickable" ng-click="showBrowseControls = !showBrowseControls" >
+	  <span ng-hide="showBrowseControls">Options <i class="fa fa-chevron-down" ></i></span>
+	  <span ng-show="showBrowseControls">Hide <i class="fa fa-chevron-up"></i></span>
+	</div>
+</div>

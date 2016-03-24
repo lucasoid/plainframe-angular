@@ -1,0 +1,34 @@
+<header id="site-header">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/"><i class="fa fa-home"></i></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-menu" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-search"></i><span class="alt">Search</span></a>
+          <ul class="dropdown-menu search" role="menu">
+            <li><input placeholder="search..." type="text" ng-model="searchterms" ng-model-options="{debounce:150}" ng-change="search(searchterms)"/></li>
+            <li ng-show="searchResults">
+            	<ul class="search-results">
+            		<li ng-repeat="result in searchResults" ng-bind-html="result.title | detailLink:result:'books/:id'"></li>
+            	</ul>
+            </li>
+          </ul>
+        </li>
+		<li ng-class="{'active': activeTab == 'books' }"><a href="#/books"><i class="fa fa-book"></i><span class="alt">Books</span></a></li>
+		<li ng-class="{'active': activeTab == 'uploads' }"><a href="#/uploads"><i class="fa fa-upload"></i><span class="alt">Uploads</span></a></li>
+        <li><a href="/logout"><i class="fa fa-sign-out"></i><span class="alt">Log out</span></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>

@@ -1,0 +1,46 @@
+<div id="book-details">
+<h1>{{ book.title }}</h1>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="tabs">
+				<li ng-click="renderActiveTab('basic')" ng-class="display == 'basic' ? 'active' : 'inactive'" class="clickable">Basic Info</li>
+			</ul>  
+		</div>
+	</div>
+	<div class="row">
+			<div class="col-xs-12">
+				<div class="transition-frame-wrapper">
+					<div class="transition-frame">
+						<div ng-show="display == 'basic'" class="angular-fade transition-box">
+							<div class="tab-content">
+							<div  class="row">
+								<div class="col-sm-12 col-xs-12 details-box">
+									<h3>Basic Info</h3>
+									<table class="table">
+										<tr><th>Title</th><td ng-bind-html="upload.title"></td></tr>
+										<tr><th>Creator</th><td>{{ upload.creatorid }}</td></tr>
+										<tr><th>Date</th><td>{{ upload.updated|date:'MM/dd/yyyy'}}</td></tr>
+									</table>
+									<div>
+									<a href="/static/{{upload.id}}">Click to Download</a>
+									</div>
+									<div>
+									<img src="/static/{{upload.id}}" width="100" />
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" ng-if="upload">
+			<br/>
+			<popup-form template="delete" obj="upload" helpers="{resource:'Upload'}" after-submit="getUpload()" ></popup-form>
+			<br/>
+		</div> 
+	</div>
+</div>

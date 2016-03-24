@@ -1,0 +1,42 @@
+<div class="inline" ng-controller="uploadFileCtrl">
+<button  type="button" ng-click="init()" data-toggle="modal" data-target="#add-file">
+  <i class="fa fa-plus"></i>
+</button>    
+<div class="modal fade" id="add-file" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form name="newfile" novalidate autocomplete="off" ng-submit="newfile.$valid && upload()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="refresh() && init()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >Upload a file</h4>		
+      </div>
+      <div class="modal-body">
+      	<div ng-hide="status == 'submitted' || !canUpload">
+        <div class="form-group">
+        	<label for="file">Select file</label>
+        	<div class="input-group">
+        		<input name="file" id="file" type="file" file-model="formObject.file" />
+        	</div>
+        </div>
+        </div>
+        <div ng-show="status == 'submitted'">
+        	<div class="submitted" ng-bind-html="submittedMessage"></div>
+        </div>
+        <div ng-show="!canUpload">
+        <span class="error">Sorry, your browser does not support this feature. Please use a different browser!</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="status == 'submitting' || status == 'submitted' ">
+        	<button type="button"  data-dismiss="modal" ng-click="refresh() && init()">Cancel</button>
+        	<input class="button" type="submit" value="Add" ng-click="submitClicked = true"/>
+        </div>
+        <div ng-show="status == 'submitting'">
+        	<i class="fa fa-spinner fa-spin"></i>
+        </div>
+      </div>
+    </div>
+    </form>  
+  </div>
+</div>
+</div>

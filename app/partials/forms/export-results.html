@@ -1,0 +1,10 @@
+<form class="inline" action="download" method="get">
+<input type="hidden" name="filters" value="{{ filters }}"/>
+<input type="hidden" name="rpp" value="{{ rpp }}" />
+<input type="hidden" name="page" value="{{ page }}" />
+<input type="hidden" name="sortlevels" value="{{ sortlevels }}"/>
+<input type="hidden" name="action" value="export" />
+<input type="hidden" name="resource" value="{{ model }}"/>
+<input type="hidden" name="id" value="all" />
+<button ng-click="download.submit()" class="export-button"><i class="fa fa-download"></i></button>
+</form>

@@ -1,0 +1,147 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:11pt;
+  line-height:1.5em;
+}
+
+#content-wrap {
+  margin-left:15px;
+  margin-right:15px;
+}
+
+/*ANCHORS, HEADINGS, AND SPANS */
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;  
+}
+
+a {
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+    
+button, .button, a.button, input[type='submit'] {
+	padding:.25em 1em;
+	background:transparent;
+	border:1px solid #aaa;
+	color:#000;
+	box-shadow:1px 1px 5px #ccc;
+}
+
+button:hover, .button:hover, input[type='submit']:hover {
+	background:#ccc;	
+	box-shadow:0 0 5px #ccc;
+	
+}
+
+button.browse-controls,
+.button.browse-controls {
+	box-shadow:none;
+}
+
+/*HEADER*/
+
+#site-header {
+	font-family:'Raleway', Helvetica, sans-serif;
+	text-transform:uppercase;
+}
+
+.navbar-brand i.fa {
+	padding:15px;
+}
+
+.navbar-nav li a .alt {
+	opacity:.5;
+	display:block;
+}
+.navbar-nav li:hover a .alt {
+	opacity:1;
+}
+
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:hover {
+	background:transparent;
+	border-bottom:2px solid rgba(200,200,200, .3);
+}
+
+.scrolled-down #site-header .dropdown-menu>li a {
+	color:#000;
+}
+
+ul.search {
+	padding:0;
+	color:#000;
+}
+ul.search input {
+	width:100%;	
+}
+ul.search-results {
+	padding:0;
+	list-style:none;
+}
+
+.search-results li a {
+	display:inline-block;
+	padding:5px;
+	width:100%;
+}
+.search-results li a:hover {
+	background-color:#efefef;
+}
+
+.scrolled-down #site-header .search-results a {
+	color:inherit;
+}
+
+@media screen and (max-width:767px) {
+  .navbar-collapse {
+    width:100%;
+    text-align:left;
+  }
+  .scrolled-down #site-header .dropdown-menu>li a {
+    color:#fff;
+  }
+  
+}
+
+/******************
+DASHBOARD SECTION
+******************/
+
+.dashboard-link, .dashboard-link:hover, .dashboard-link:active {
+	color:#000;
+	text-decoration:none;
+	padding-top:2em;
+	padding-bottom:2em;
+	text-align:center;
+	transition:.5s;
+	border:1px solid #cecece;
+	margin-left:-1px;
+}
+.dashboard-link:hover {
+	background-color:rgba(200, 200, 200, .3);
+}
+
+/*********************
+DETAIL SECTION
+*********************/
+
+ul.tabs li.active,
+ul.tabs li:hover {
+	background:#efefef;
+	color:#000;
+}
+
+.tabs li:first-child {
+	-moz-border-top-left-radius:15px;
+	border-top-left-radius:15px;
+}
+.tabs li:last-child {
+	-moz-border-top-right-radius:15px;
+	border-top-right-radius:15px;
+}
+

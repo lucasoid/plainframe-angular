@@ -1,0 +1,30 @@
+{
+  "name": "plainframe-angular",
+  "homepage": "https://github.com/lucasoid/plainframe-angular",
+  "description": "Angular configuration for plainframe framework",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Ben Lucas"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "~1.4.7",
+    "angular-mocks": "~1.4.6",
+    "angular-resource": "~1.4.6",
+    "angular-modal-service": "~0.6.9",
+    "angular-route": "~1.4.6",
+    "angular-ui-tinymce": "~0.0.10",
+    "angular-sanitize": "~1.4.6",
+    "bootstrap": "~3.3.5"
+  }
+}

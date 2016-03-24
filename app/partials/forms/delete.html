@@ -1,0 +1,34 @@
+<div ng-controller="deleteItemCtrl" class="inline">
+<button type="button" ng-click="init()" data-toggle="modal" data-target="#del{{ helpers.resource }}{{ obj.id }}">
+  <i class="fa fa-trash"></i>
+</button>
+<div class="modal fade" id="del{{ helpers.resource }}{{ obj.id }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+	  <form name="delete" novalidate ng-submit="delete.$valid && del()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="refresh()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >Delete</h4>
+      </div>
+      <div class="modal-body">
+      	<div ng-hide="status == 'submitted'">
+	    	    <h4>Really delete this record?</h4>
+	        	<aside>
+    		    {{ obj.itemdescription }}
+	    	    </aside>
+		</div>
+		<div ng-show="status == 'submitted'">
+			<div ng-bind-html="actionMessage"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+      	<div ng-show="status == 'init'">
+        	<button type="button"  data-dismiss="modal">Cancel</button>
+			<input class="button" type="submit" value="Delete"/>
+        </div>
+      </div>
+	  </form>
+    </div>
+  </div>
+</div>
+</div>

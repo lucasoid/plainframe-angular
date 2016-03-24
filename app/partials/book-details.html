@@ -1,0 +1,51 @@
+<div id="book-details">
+<h1>{{ book.title }}</h1>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="tabs">
+				<li ng-click="renderActiveTab('basic')" ng-class="display == 'basic' ? 'active' : 'inactive'" class="clickable">Basic Info</li>
+				<li ng-click="renderActiveTab('other')" ng-class="display == 'other' ? 'active' : 'inactive'" class="clickable">Other Info</li>
+			</ul>  
+		</div>
+	</div>
+	<div class="row">
+			<div class="col-xs-12">
+				<div class="transition-frame-wrapper">
+					<div class="transition-frame">
+						<div ng-show="display == 'basic'" class="angular-fade transition-box">
+							<div class="tab-content">
+							<div  class="row">
+								<div class="col-sm-12 col-xs-12 details-box">
+									<h3>Basic Info</h3>
+									<table class="table">
+										<tr><th>Title</th><td ng-bind-html="book.title"></td></tr>
+										<tr><th>Author</th><td ng-bind-html="book.author"></td></tr>
+										<tr><th>Length</th><td>{{ book.pages }}</td></tr>
+										<tr><th>Published</th><td>{{ book.published|date:'MM/dd/yyyy' }}</td></tr>
+									</table>
+								</div>
+							</div>
+							</div>
+						</div>
+						<div ng-show="display == 'other'" class="angular-fade transition-box">
+							<div class="tab-content">
+								<h3>Filter demos</h3>
+								<p ng-bind-html="'Example of a filter highlighting the first occurrence of a substring within a provided string'|highlight:'string'"></p>
+								<p>Example of converting a boolean value to a symbol: <span ng-bind-html="1|booleanToSymbol"></span></p>
+								<p ng-bind-html="'<div><h1>Example</h1> of <span><b>converting</b> HTML</span> <div>to plain text</div> and truncating it to a defined character limit</div>'|truncateToPlainText:85"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" ng-if="book">
+			<br/>
+			<popup-form  obj="book" template="book" helpers="{new:false}" after-submit="getBook()"></popup-form>
+			<popup-form template="delete" obj="book" helpers="{resource:'Book'}" after-submit="getBook()"></popup-form>
+			<br/>
+		</div> 
+	</div>
+</div>

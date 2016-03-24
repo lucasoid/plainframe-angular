@@ -1,0 +1,61 @@
+<div class="inline" ng-controller="bookEditCtrl">
+<button  type="button" ng-click="init()" data-toggle="modal" data-target="#edit-book{{ formObject.id }}">
+  <i ng-show="helpers.new" class="fa fa-plus"></i>
+  <i ng-hide="helpers.new" class="fa fa-edit"></i>
+</button>
+<div class="modal fade" id="edit-book{{ formObject.id }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form name="editbook" novalidate ng-submit="editbook.$valid && update()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="refresh()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >Book Information</h4>
+      </div>
+      <div class="modal-body">
+      	<div ng-hide="status == 'submitted'">
+	        <div class="form-group">
+	        	<label for="Title">Title</label>
+	        	<div class="input-group full-width">
+	        		<input type="text" required name="title" ng-model="formObject.title">
+	        	</div>
+				<div ng-show="submitClicked || editbook.$submitted || editbook.title.$touched">
+	      			<div class="error" ng-show="editbook.line1.$error.required">Please enter a title.</div>
+	   			</div>
+	        </div>
+			<div ng-if="startTinyMCE" class="form-group">
+	        	<label for="author">Author</label>
+	        	<div class="input-group full-width">
+					<textarea name='author'  id='author' class='form-control' ng-model="formObject.author" ui-tinymce ></textarea>
+	        	</div>
+	        </div>
+			<div class="form-group">
+	        	<label for="pages"># pages</label>
+	        	<div class="input-group">
+	        		<input type="text" name="pages" ng-model="formObject.pages">
+	        	</div>
+	        </div>
+			<div class="form-group">
+	        	<label for="published">Date published</label>
+	        	<div class="input-group">
+	        		<input type="text" name="published" datepicker ng-model="formObject.published" />	        		
+	        	</div>
+	        </div>
+        </div>
+        <div ng-show="status == 'submitted'">
+        	<div class="submitted" ng-bind-html="submittedMessage"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="status == 'submitting' || status == 'submitted' ">
+        	<button type="button"  data-dismiss="modal">Cancel</button>
+        	<input class="button" type="submit" value="Save" ng-click="submitClicked = true"/>
+        </div>
+        <div ng-show="status == 'submitting'">
+        	<i class="fa fa-spinner fa-spin"></i>
+        </div>
+      </div>
+    </div>
+    </form>  
+  </div>
+</div>
+</div>
